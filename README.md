@@ -1,3 +1,7 @@
+[查看作品集](PORTFOLIO.md)
+
+![工作坊完成徽章](https://img.shields.io/badge/GitHub_Copilot_%E5%AF%A6%E6%88%B0%E5%B7%A5%E4%BD%9C%E5%9D%8A-%E5%B7%B2%E5%AE%8C%E6%88%90-1F883D?style=for-the-badge&logo=githubcopilot&logoColor=white)
+
 <div align="center">
 
 # 🎉 Congratulations wei0427! 🎉
