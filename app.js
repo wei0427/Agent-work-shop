@@ -104,6 +104,7 @@ function renderTodos() {
 
   const incompleteCount = todos.filter((todo) => !todo.completed).length;
   remainingCount.textContent = `未完成：${incompleteCount} 項`;
+  clearCompletedButton.disabled = !todos.some((todo) => todo.completed);
 }
 
 todoForm.addEventListener("submit", (event) => {
@@ -127,6 +128,14 @@ todoForm.addEventListener("submit", (event) => {
 });
 
 clearCompletedButton.addEventListener("click", () => {
+  if (!todos.some((todo) => todo.completed)) {
+    return;
+  }
+
+  if (!confirm("確定要清除所有已完成的待辦事項嗎？")) {
+    return;
+  }
+
   todos = todos.filter((todo) => !todo.completed);
   saveTodos();
   renderTodos();
