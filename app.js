@@ -15,7 +15,7 @@ const THEME_STORAGE_KEY = "todo-list-theme";
 const filterMessages = {
   all: "還沒有任何待辦事項，新增一個吧！",
   active: "目前沒有未完成的待辦事項。",
-  completed: "目前沒有已完成的待辦事項。",
+  completed: "目前沒有已完成的待辦事項；切換到「全部」即可查看其他項目。",
 };
 
 let todos = loadTodos();
