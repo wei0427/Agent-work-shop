@@ -12,6 +12,8 @@ const themeLabel = themeToggle.querySelector(".theme-label");
 const filterButtons = document.querySelectorAll("[data-filter]");
 
 const THEME_STORAGE_KEY = "todo-list-theme";
+const FILTER_STORAGE_KEY = "todo-list-filter";
+const filterValues = ["all", "active", "completed"];
 const filterMessages = {
   all: "還沒有任何待辦事項，新增一個吧！",
   active: "目前沒有未完成的待辦事項。",
@@ -19,7 +21,7 @@ const filterMessages = {
 };
 
 let todos = loadTodos();
-let currentFilter = "all";
+let currentFilter = getInitialFilter();
 
 function loadTodos() {
   try {
@@ -49,6 +51,11 @@ function applyTheme(theme) {
   themeIcon.textContent = isDark ? "☀️" : "🌙";
   themeLabel.textContent = isDark ? "淺色模式" : "深色模式";
   themeToggle.setAttribute("aria-pressed", String(isDark));
+}
+
+function getInitialFilter() {
+  const savedFilter = localStorage.getItem(FILTER_STORAGE_KEY);
+  return filterValues.includes(savedFilter) ? savedFilter : "all";
 }
 
 function getVisibleTodos() {
@@ -141,6 +148,7 @@ themeToggle.addEventListener("click", () => {
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     currentFilter = button.dataset.filter;
+    localStorage.setItem(FILTER_STORAGE_KEY, currentFilter);
     filterButtons.forEach((filterButton) => {
       const isActive = filterButton === button;
       filterButton.classList.toggle("active", isActive);
@@ -151,4 +159,9 @@ filterButtons.forEach((button) => {
 });
 
 applyTheme(getInitialTheme());
+filterButtons.forEach((button) => {
+  const isActive = button.dataset.filter === currentFilter;
+  button.classList.toggle("active", isActive);
+  button.setAttribute("aria-pressed", String(isActive));
+});
 renderTodos();
